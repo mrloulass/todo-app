@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Button, FormGroup } from '@blueprintjs/core';
 import './form.scss';
 
 function Form (props) {
@@ -24,7 +24,7 @@ function Form (props) {
         </label>
 
         <label>
-          <button type="submit">Add Item</button>
+          <Button type="submit">Add Item</Button>
         </label>
       </form>
   )

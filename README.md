@@ -28,11 +28,10 @@ In the project directory, you can run:
 - Scaffolding
 
 ### Phase 2:  Persistence
-- Implement a custom Form Hook
+- adding an editor so that users can save their preferences for the application, allowing them to change some of the default behaviors
+  - Implement a custom Form Hook
 
-- Implement a custom Ajax Hook
-
-- Connect to a live API for storing To Do Items
+  - Connect to a live API for storing To Do Items
 
 ### Phase 3: 
 

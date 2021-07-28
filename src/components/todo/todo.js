@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import useForm from '../../hooks/form.js';
-import { Button, FormGroup } from '@blueprintjs/core';
 import { v4 as uuid } from 'uuid';
 
-import Header from '../header/header.js';
-import Form from '../form/form.js';
+import Header from '../header/Header.js';
+import Form from '../form/Form.js';
+import List from '../list/List.js';
+import { SettingsContext } from '../context/Settings.js';
 
 const ToDo = () => {
 
+  const settings = useContext(SettingsContext);
+
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
+  const [startPage, setStartPage] = useState(0);
+  const [endPage, setEndPage] = useState(settings.itemNumber);
+
   const { handleChange, handleSubmit } = useForm(addItem);
+
 
   function addItem(item) {
     console.log(item);
@@ -43,47 +50,36 @@ const ToDo = () => {
     document.title = `To Do List: ${incomplete}`;
   }, [list]);
 
+  function pagination() {
+    let result = list.slice(startPage, endPage);
+    return result;
+  }
+
+  function next() {
+    setStartPage(startPage + settings.itemNumber);
+    setEndPage(endPage + settings.itemNumber);
+  }
+  function previous() {
+    setEndPage(endPage - settings.itemNumber);
+    setStartPage(startPage - settings.itemNumber);
+  }
+
   return (
     <>
       <Header incomplete={incomplete} />
 
       <Form
-        onSubmit={handleSubmit}
-        onChange={handleChange}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
       />
-      <form onSubmit={handleSubmit}>
 
-          <h2>Add To Do Item</h2>
-
-          <label>
-            <span>To Do Item</span>
-            <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
-          </label>
-
-          <label>
-            <span>Assigned To</span>
-            <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
-          </label>
-
-          <label>
-            <span>Difficulty</span>
-            <input onChange={handleChange} defaultValue={3} type="range" min={1} max={5} name="difficulty" />
-          </label>
-
-          <label>
-            <button type="submit">Add Item</button>
-          </label>
-        </form>
-
-      {list.map(item => (
-        <div key={item.id}>
-          <p>{item.text}</p>
-          <p><small>Assigned to: {item.assignee}</small></p>
-          <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
-          <hr />
-        </div>
-      ))}
+      <List
+        pagination={pagination}
+        next={next}
+        previous={previous}
+        toggleComplete={toggleComplete}
+        deleteItem={deleteItem}
+      />
 
     </>
   );
