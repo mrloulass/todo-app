@@ -2,14 +2,19 @@ import React, { useContext, useEffect, useState } from 'react';
 import useForm from '../../hooks/form.js';
 import { v4 as uuid } from 'uuid';
 
+import './todo.scss'
+
 import Header from '../header/Header.js';
 import Form from '../form/Form.js';
 import List from '../list/List.js';
+import SettingsForm from '../settingsForm/settingsForm.js';
 import { SettingsContext } from '../context/Settings.js';
+import { ThemeContext } from '../context/Theme.js';
 
 const ToDo = () => {
 
   const settings = useContext(SettingsContext);
+  const theme = useContext(ThemeContext);
 
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
@@ -66,8 +71,11 @@ const ToDo = () => {
 
   return (
     <>
+      <div className={`App ${theme.mode}`}>
+        
       <Header incomplete={incomplete} />
-
+        <SettingsForm />
+      
       <Form
         handleSubmit={handleSubmit}
         handleChange={handleChange}
@@ -80,7 +88,7 @@ const ToDo = () => {
         toggleComplete={toggleComplete}
         deleteItem={deleteItem}
       />
-
+      </div>
     </>
   );
 };
