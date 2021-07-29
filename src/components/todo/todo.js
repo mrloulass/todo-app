@@ -8,6 +8,8 @@ import Header from '../header/Header.js';
 import Form from '../form/Form.js';
 import List from '../list/List.js';
 import SettingsForm from '../settingsForm/settingsForm.js';
+import Login from '../login/Login.js';
+import Auth from '../auth/Auth.js';
 import { SettingsContext } from '../context/Settings.js';
 import { ThemeContext } from '../context/Theme.js';
 
@@ -70,26 +72,34 @@ const ToDo = () => {
   }
 
   return (
-    <>
-      <div className={`App ${theme.mode}`}>
-        
-      <Header incomplete={incomplete} />
+    <div className={`App ${theme.mode}`}>
         <SettingsForm />
-      
-      <Form
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-      />
+        <Login>
 
-      <List
-        pagination={pagination}
-        next={next}
-        previous={previous}
-        toggleComplete={toggleComplete}
-        deleteItem={deleteItem}
-      />
-      </div>
-    </>
+        <Auth capability="read">
+          <p>Can you read??</p>
+        </Auth>
+        <Auth capability="delete">
+          <p>Can you delete??</p>
+        </Auth>
+
+        <Header incomplete={incomplete} />
+
+
+        <Form
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          />
+
+        <List
+          pagination={pagination}
+          next={next}
+          previous={previous}
+          toggleComplete={toggleComplete}
+          deleteItem={deleteItem}
+        />
+      </Login>
+    </div>
   );
 };
 
