@@ -18,6 +18,8 @@ In the project directory, you can run:
 - Launches the test runner in the interactive watch mode.
 - See the section about running tests for more information.
 
+- add a `.env` file to add your SECRET for server API
+
 ## Development Process
 
 ### Phase 1: Application Setup
@@ -39,16 +41,17 @@ In the project directory, you can run:
     - On successful login, store the token as a cookie
 
 ### Phase 4: 
+- Integrating with a live API
+  - functionality of the application by connecting to live servers for login, authorization, and data access
 
 ## Tests
-
-### Phase 1:
 - Tests all behavioral functionality
+- Testing server CRUD for todos
 
 ## UML
 
 
 ## Links
 
-- []()
-- []()
+- [Netlify](https://nervous-goodall-c217b0.netlify.app/)
+- [Todo-Backend](https://github.com/mrloulass/backend-todo-app)
