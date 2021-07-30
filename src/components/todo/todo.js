@@ -73,32 +73,31 @@ const ToDo = () => {
 
   return (
     <div className={`App ${theme.mode}`}>
-        <SettingsForm />
-        <Login>
+      <Header incomplete={incomplete} />
+      <SettingsForm />
+      <Login />
+        
+     <Auth capability="read">
+        <p>You have access to read.</p>
+    
+      <Auth capability="delete">
+        <p>You have access to delete.</p>
+      
+        
+      <Form
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+      />
 
-        <Auth capability="read">
-          <p>Can you read??</p>
-        </Auth>
-        <Auth capability="delete">
-          <p>Can you delete??</p>
-        </Auth>
-
-        <Header incomplete={incomplete} />
-
-
-        <Form
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-          />
-
-        <List
-          pagination={pagination}
-          next={next}
-          previous={previous}
-          toggleComplete={toggleComplete}
-          deleteItem={deleteItem}
-        />
-      </Login>
+      <List
+        pagination={pagination}
+        next={next}
+        previous={previous}
+        toggleComplete={toggleComplete}
+        deleteItem={deleteItem}
+      />
+      </Auth>
+      </Auth>
     </div>
   );
 };
